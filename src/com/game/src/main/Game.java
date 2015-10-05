@@ -91,7 +91,7 @@ public class Game extends Canvas implements Runnable {
 		requestFocus();//so we don't have to click screen
 
 		try {
-			ReadSpriteFiles readSpriteFiles = new ReadSpriteFiles("C:\\Documents and Settings\\Dillon\\My Documents\\Downloads\\spaceGame\\res\\SpriteSheets\\spriteSheetInfo.txt");
+			ReadSpriteFiles readSpriteFiles = new ReadSpriteFiles("C:\\Game-Engine\\Game-Engine\\res\\SpriteSheets\\spriteSheetInfo.txt");
 			SpriteSheetGenerator.spriteSheetCreator(readSpriteFiles.openFile());
 		} catch (IOException e) {
 			e.printStackTrace();

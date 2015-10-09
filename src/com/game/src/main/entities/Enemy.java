@@ -1,14 +1,14 @@
 package com.game.src.main.entities;
 import java.util.Random;
 import com.game.src.main.Game;
-import com.game.src.main.GameObject;
+import com.game.src.main.GameActor;
 import com.game.src.main.Physics;
 import com.game.src.main.controllers.CalcController;
 import com.game.src.main.controllers.RenderController;
 import com.game.src.main.interfaces.IEntityHarmful;
 import com.game.src.main.views.EnemyView;
 
-public class Enemy extends GameObject implements IEntityHarmful
+public class Enemy extends GameActor implements IEntityHarmful
 {
 	static private int _levelEnemyCountAllowed = 5;
 	static private int _enemyKilled = 0;

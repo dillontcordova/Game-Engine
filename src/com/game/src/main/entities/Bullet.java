@@ -1,13 +1,13 @@
 package com.game.src.main.entities;
 import java.awt.Rectangle;
-import com.game.src.main.GameObject;
+import com.game.src.main.GameActor;
 import com.game.src.main.Physics;
 import com.game.src.main.controllers.CalcController;
 import com.game.src.main.controllers.RenderController;
 import com.game.src.main.interfaces.IEntityFriendly;
 import com.game.src.main.views.BulletView;
 
-public class Bullet extends GameObject implements IEntityFriendly {
+public class Bullet extends GameActor implements IEntityFriendly {
 
 	static private final int MAX_BULLETS = 2;
 	private boolean isToBeRemoved = false;

@@ -4,11 +4,11 @@ import java.util.LinkedList;
 
 public class Physics {
 
-	public static boolean Collision(GameObject mainActor, LinkedList<GameObject> actorList) {
+	public static boolean Collision(GameActor mainActor, LinkedList<GameActor> actorList) {
 		Rectangle mainActorBounds = mainActor.getBounds();
 		Rectangle otherActorBounds;
 		for(int i = 0; i < actorList.size(); i++) {
-			GameObject otherActor = actorList.get(i);
+			GameActor otherActor = actorList.get(i);
 			if(mainActor != otherActor) {
 				otherActorBounds = otherActor.getBounds();
 				if( mainActorBounds.intersects(otherActorBounds)) {

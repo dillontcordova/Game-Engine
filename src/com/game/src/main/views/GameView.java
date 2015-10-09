@@ -1,16 +1,16 @@
 package com.game.src.main.views;
 
 import com.game.src.libs.Animation;
-import com.game.src.main.GameObject;
+import com.game.src.main.GameActor;
 import com.game.src.main.Sprites.ssSpriteSheet;
 import java.awt.*;
 
 public abstract class GameView {
 	protected boolean isToBeRemoved;
 	protected Animation animation;
-	protected GameObject _model;
+	protected GameActor _model;
 
-	protected GameView(GameObject model) {
+	protected GameView(GameActor model) {
 		_model = model;
 		model.setSpriteSheet();
 		createAnimation(_model);
@@ -34,7 +34,7 @@ public abstract class GameView {
 		isToBeRemoved = true;
 	}
 
-	private void createAnimation(GameObject model) {
+	private void createAnimation(GameActor model) {
 		ssSpriteSheet sheet = model.getSpriteSheet();
 		sheet.drawSpriteClipsFromSheet();
 		animation = _model.createAnimation(sheet.drawSpriteClipsFromSheet());

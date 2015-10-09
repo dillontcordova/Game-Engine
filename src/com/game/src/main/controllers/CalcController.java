@@ -2,11 +2,14 @@ package com.game.src.main.controllers;
 import java.util.LinkedList;
 import java.util.Random;
 import com.game.src.main.Game;
-import com.game.src.main.GameObject;
+import com.game.src.main.GameActor;
 import com.game.src.main.entities.Enemy;
 
 public class CalcController {
-	static public volatile LinkedList<GameObject> sActorList = new LinkedList<>();
+	public static volatile LinkedList<GameActor> sActorList = new LinkedList<>();
+	public static volatile int currentKey = 0;
+	public static boolean keyPressed;
+	public static boolean keyReleased;
 
 	private Random _rand;
 
@@ -27,7 +30,7 @@ public class CalcController {
 
 	public void tick() {
 		for (int i = sActorList.size() - 1; i >= 0; i--) {
-			GameObject actor = sActorList.get(i);
+			GameActor actor = sActorList.get(i);
 			actor.tick();
 			if (actor.getIsToBeRemoved()) {
 				removeEntity(actor);
@@ -35,11 +38,11 @@ public class CalcController {
 		}
 	}
 
-	public static void addEntity(GameObject block) {
+	public static void addEntity(GameActor block) {
 		sActorList.add(block);
 	}
 
-	public void removeEntity(GameObject block) {
+	public void removeEntity(GameActor block) {
 		block.destructor();
 		synchronized (Enemy.class) {
 			sActorList.remove(block);

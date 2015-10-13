@@ -28,14 +28,6 @@ public class Player extends GameActor implements IEntityFriendly {
 		set_topSpeed(6);
 		_acceleration = .1;
 	}
-//	public double convertFeetToMeters(double feet){
-//		// (feet / 3.2808) //feet to meters
-//		return (feet / 3.2808);
-//	}
-//	public double convertDegreesToRadions(double degrees){
-//		//(pi * degrees / 180) //degrees to radions
-//		return (Math.PI * degrees / 180);
-//	}
 
 	public void tick() {
 		handleKeyInput();
@@ -60,6 +52,7 @@ public class Player extends GameActor implements IEntityFriendly {
 //				set_y((Game.HEIGHT * Game.SCALE) - avgSize_ReplaceThis +2);
 			}
 		physics();
+		_physics.plotNewPosition();
 	}
 
 	protected void physics() {

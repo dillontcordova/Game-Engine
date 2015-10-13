@@ -14,7 +14,7 @@ public abstract class GameActor {
 	private double _velX;
 	private double _velY;
 	private double _topSpeed;
-	protected Physicss physics;
+	protected Physicss _physics;
 	protected boolean _isToBeRemoved = false;
 	protected ssSpriteSheet spriteSheet;
 
@@ -22,7 +22,7 @@ public abstract class GameActor {
 		set_x(x);
 		set_y(y);
 		CalcController.addEntity(this);
-		physics = new Physicss();
+		_physics = new Physicss();
 	}
 
 	public abstract void tick();

@@ -1,5 +1,8 @@
 package com.game.src.main.Sprites;
 import com.game.src.main.ImageLoader;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,19 +44,35 @@ public class ssSpriteSheet {
 	public List<List<BufferedImage>> drawSpriteClipsFromSheet() {
 		int COLUMNS = spriteSheetWidth / spriteSize;
 		int ROWS = spriteSheetHeight / spriteSize;
-		List<List<BufferedImage>> spriteClips = new ArrayList<>();;
+		List<List<BufferedImage>> spriteClips = new ArrayList<>();
 
 		for (int col = 0; col < COLUMNS; col++) {
 			List<BufferedImage> imgList = new ArrayList<>();
 			for (int row = 0; row < ROWS; row++) {
 				BufferedImage curGrabbedImg = grabImage(col, row);
-				if( isAnImage(curGrabbedImg) ){
+				if( isAnImage(curGrabbedImg) ) {
+					boolean isVertical = true;
+					curGrabbedImg = flipImage(curGrabbedImg, isVertical);
 					imgList.add(curGrabbedImg);
 				}
 			}
 			spriteClips.add(imgList);
 		}
 		return spriteClips;
+	}
+
+	private static BufferedImage flipImage(BufferedImage oldImage, boolean isVertical) {
+		AffineTransform at = new AffineTransform();
+		double flip = isVertical ? 1D: -1D;
+		at.concatenate(AffineTransform.getScaleInstance(1 * flip, -1 * flip));
+		at.concatenate(AffineTransform.getTranslateInstance(0, -oldImage.getHeight()));
+
+		BufferedImage newImage = new BufferedImage(oldImage.getWidth(), oldImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tmpGraphic = newImage.createGraphics();
+		tmpGraphic.transform(at);
+		tmpGraphic.drawImage(oldImage, 0, 0, null);
+		tmpGraphic.dispose();
+		return newImage;
 	}
 
 	public void setImageHeight(String sheetHeight) {

@@ -102,7 +102,7 @@ public class Game extends Canvas implements Runnable {
 		new Player(200, HEIGHT*SCALE);//TODO: replace
 		calcController.createEnemies();
 
-		createBufferStrategy(2);//this creates double buffering //TODO: Move to FrameRender Class
+		this.createBufferStrategy(2);//this creates double buffering //TODO: Move to FrameRender Class
 		BufferStrategy bufferStrategy = this.getBufferStrategy(); //TODO: Move to FrameRender Class
 		this.addKeyListener(new KeyInput(this));//has key adapter which creates separate thread for keyboard input
 		render = new FrameRender(bufferStrategy, renderController);//rendering is taking place on its own thread FrameRender.java //TODO: Move to FrameRender Class

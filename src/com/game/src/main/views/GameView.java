@@ -36,7 +36,6 @@ public abstract class GameView {
 
 	private void createAnimation(GameActor model) {
 		ssSpriteSheet sheet = model.getSpriteSheet();
-		sheet.drawSpriteClipsFromSheet();
 		animation = _model.createAnimation(sheet.drawSpriteClipsFromSheet());
 	}
 }

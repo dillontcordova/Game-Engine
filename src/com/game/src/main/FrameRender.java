@@ -1,5 +1,6 @@
 package com.game.src.main;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -7,17 +8,17 @@ import com.game.src.main.controllers.RenderController;
 
 public class FrameRender implements Runnable
 {
+	private long _FPS = 60;
+	private Thread _thread;
 	private boolean running;
 	private Graphics _graphics;
-	private BufferStrategy _bufferStartegy;
-	private RenderController _renderController;
-	private Thread _thread;
-	private BufferedImage _backGround = null;
 	private ImageLoader _loader;
-	private long _FPS = 60;
+	private BufferStrategy _bufferStrategy;
+	private BufferedImage _backGround = null;
+	private RenderController _renderController;
 
 	public FrameRender(BufferStrategy bufferStrat, RenderController ctrl) {
-		_bufferStartegy = bufferStrat;
+		_bufferStrategy = bufferStrat;
 		_renderController = ctrl;
 		init();
 	}
@@ -35,13 +36,19 @@ public class FrameRender implements Runnable
 	}
 	
 	private void render() {
-		_graphics = _bufferStartegy.getDrawGraphics();
-		
-		_graphics.drawImage(_backGround, 0, 0, null);
-		_renderController.render(_graphics);
-		
-		_graphics.dispose();
-		_bufferStartegy.show();
+		_graphics = _bufferStrategy.getDrawGraphics();
+
+		Graphics2D g2d = (Graphics2D) _graphics;
+		AffineTransform at = g2d.getTransform();
+		g2d.translate(320 / 2, 240 / 2);
+		g2d.scale(1, -1);
+		g2d.setTransform(at);
+
+		g2d.drawImage(_backGround, 0, 0, null);
+		_renderController.render(g2d);
+
+		g2d.dispose();
+		_bufferStrategy.show();
 	}
 
 	private void init() {
@@ -81,7 +88,7 @@ public class FrameRender implements Runnable
 	public synchronized void stopThread() {
 		_graphics.dispose();
 		_graphics = null;
-		_bufferStartegy = null;
+		_bufferStrategy = null;
 		_renderController = null;
 		_backGround = null;
 		_loader = null;		

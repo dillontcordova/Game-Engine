@@ -40,7 +40,7 @@ public abstract class GameActor {
 	}
 
 	public Animation createAnimation(List<List<BufferedImage>> clips) {
-		return new Animation(5, clips);
+		return new Animation(5, clips);//TODO: add animation speed input here
 	}
 
 	protected void handleKeyInput() {

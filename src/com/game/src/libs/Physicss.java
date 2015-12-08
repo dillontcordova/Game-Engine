@@ -16,7 +16,7 @@ public class Physicss {
 	private double yPos = 240;
 
 	public Physicss() {
-		init(270, 0, .5, 10);
+		init(0, 0, .5, 10);//hard coded direction test
 	}
 
 	public Physicss(double angle, double speed, double acceleration, double topSpeed) {

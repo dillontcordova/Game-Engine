@@ -1,6 +1,5 @@
 package com.game.src.main.Sprites;
 import com.game.src.main.ImageLoader;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -25,6 +24,10 @@ public class ssSpriteSheet {
 		return spriteSheet.getSubimage(col * spriteSize, row * spriteSize, spriteSize, spriteSize);
 	}
 
+	private boolean isPixelTransparent( int pixel ) {
+		return (pixel>>24) == 0x00;
+	}
+
 	public boolean isAnImage( BufferedImage img ) {
 		for (int i = 0; i < img.getWidth(); i++) {
 			for (int j = 0; j < img.getHeight(); j++) {
@@ -35,10 +38,6 @@ public class ssSpriteSheet {
 			}
 		}
 		return false;
-	}
-
-	private boolean isPixelTransparent( int pixel ) {
-		return (pixel>>24) == 0x00;
 	}
 
 	public List<List<BufferedImage>> drawSpriteClipsFromSheet() {
@@ -75,19 +74,19 @@ public class ssSpriteSheet {
 		return newImage;
 	}
 
-	public void setImageHeight(String sheetHeight) {
+	public void setSheetHeight(String sheetHeight) {
 		spriteSheetHeight = Integer.valueOf(sheetHeight);
 	}
 
-	public void setImageWidth(String sheetPath) {
-		spriteSheetWidth = Integer.valueOf(sheetPath);
+	public void setSheetWidth(String sheetWidth) {
+		spriteSheetWidth = Integer.valueOf(sheetWidth);
 	}
 
-	public void setSpriteSize(String sheetPath) {
-		spriteSize = Integer.valueOf(sheetPath);
+	public void setSpriteSize(String newSpriteSize) {
+		spriteSize = Integer.valueOf(newSpriteSize);
 	}
 
-	public void setImagePath(String spriteSheetPath) {
+	public void setSheetPath(String spriteSheetPath) {
 		imageloader = new ImageLoader();
 		try {
 			spriteSheet = imageloader.loadImage(spriteSheetPath);

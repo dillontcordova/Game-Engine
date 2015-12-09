@@ -29,13 +29,13 @@ public class SpriteSheetGenerator {
 			String value = sheetValue.getSheetValue();
 			switch(sheetValue) {
 				case SheetPath:
-					spriteSheet.setImagePath((String)spriteSheetData.get(value));
+					spriteSheet.setSheetPath((String) spriteSheetData.get(value));
 					break;
 				case SheetHeight:
-					spriteSheet.setImageHeight((String)spriteSheetData.get(value));
+					spriteSheet.setSheetHeight((String) spriteSheetData.get(value));
 					break;
 				case SheetWidth:
-					spriteSheet.setImageWidth((String)spriteSheetData.get(value));
+					spriteSheet.setSheetWidth((String) spriteSheetData.get(value));
 					break;
 				case SpriteSize:
 					spriteSheet.setSpriteSize((String) spriteSheetData.get(value));

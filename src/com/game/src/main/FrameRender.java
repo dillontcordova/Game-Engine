@@ -17,8 +17,8 @@ public class FrameRender implements Runnable
 	private BufferedImage _backGround = null;
 	private RenderController _renderController;
 
-	public FrameRender(BufferStrategy bufferStrat, RenderController ctrl) {
-		_bufferStrategy = bufferStrat;
+	public FrameRender(BufferStrategy bufferStrategy, RenderController ctrl) {
+		_bufferStrategy = bufferStrategy;
 		_renderController = ctrl;
 		init();
 	}
@@ -37,18 +37,19 @@ public class FrameRender implements Runnable
 	
 	private void render() {
 		_graphics = _bufferStrategy.getDrawGraphics();
-
 		Graphics2D g2d = (Graphics2D) _graphics;
 		AffineTransform at = g2d.getTransform();
-		g2d.translate(320 / 2, 240 / 2);
+		int widthCenter = 320 / 2;
+		int heightCenter = 240 / 2;
+		g2d.translate(widthCenter, heightCenter);
 		g2d.scale(1, -1);
-		g2d.setTransform(at);
 
-		g2d.drawImage(_backGround, 0, 0, null);
+		g2d.drawImage(_backGround, (_backGround.getWidth() / 2), _backGround.getHeight(), null);
 		_renderController.render(g2d);
 
 		g2d.dispose();
 		_bufferStrategy.show();
+		g2d.setTransform(at);
 	}
 
 	private void init() {

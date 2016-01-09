@@ -1,6 +1,7 @@
 package com.game.src.main;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,6 +9,8 @@ import com.game.src.main.controllers.RenderController;
 
 public class FrameRender implements Runnable
 {
+	private int WIDTH = 0;
+	private int HEIGHT = 0;
 	private long _FPS = 60;
 	private Thread _thread;
 	private boolean running;
@@ -17,9 +20,11 @@ public class FrameRender implements Runnable
 	private BufferedImage _backGround = null;
 	private RenderController _renderController;
 
-	public FrameRender(BufferStrategy bufferStrategy, RenderController ctrl) {
+	public FrameRender(BufferStrategy bufferStrategy, int height, int width) {
+		WIDTH = width;
+		HEIGHT = height;
 		_bufferStrategy = bufferStrategy;
-		_renderController = ctrl;
+		_renderController = new RenderController();
 		init();
 	}
 
@@ -39,13 +44,18 @@ public class FrameRender implements Runnable
 		_graphics = _bufferStrategy.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D) _graphics;
 		AffineTransform at = g2d.getTransform();
-		int widthCenter = 320 / 2;
-		int heightCenter = 240 / 2;
+		int widthCenter = WIDTH / 2;
+		int heightCenter = HEIGHT / 2;
 		g2d.translate(widthCenter, heightCenter);
 		g2d.scale(1, -1);
 
-		g2d.drawImage(_backGround, (_backGround.getWidth() / 2), _backGround.getHeight(), null);
+		g2d.drawImage(_backGround, 0, 0, null);
 		_renderController.render(g2d);
+
+		//Draw Circle
+		g2d.setColor(Color.blue);
+		Ellipse2D.Float e1 = new Ellipse2D.Float(-20,-20,40,40);
+		g2d.fill(e1);
 
 		g2d.dispose();
 		_bufferStrategy.show();

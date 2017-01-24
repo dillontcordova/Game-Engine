@@ -7,12 +7,11 @@ public class Physics {
 	public static boolean Collision(GameActor mainActor, LinkedList<GameActor> actorList) {
 		Rectangle mainActorBounds = mainActor.getBounds();
 		Rectangle otherActorBounds;
-		for(int i = 0; i < actorList.size(); i++) {
-			GameActor otherActor = actorList.get(i);
-			if(mainActor != otherActor) {
+		for (GameActor otherActor : actorList) {
+			if (mainActor != otherActor) {
 				otherActorBounds = otherActor.getBounds();
-				if( mainActorBounds.intersects(otherActorBounds)) {
-					actorList.get(i).CollidedWithObject();
+				if (mainActorBounds.intersects(otherActorBounds)) {
+					otherActor.CollidedWithObject();
 					mainActor.CollidedWithObject();
 					return true;
 				}
